@@ -47,7 +47,11 @@ public class JavaUtil
      */
     public static String[] getSpecialArgs()
     {
-        return new String[]{"-XX:-UseAdaptiveSizePolicy", "-XX:+UseConcMarkSweepGC"};
+        if(Integer.parseInt(System.getProperty("java.specification.version")) >= 11) {
+                return new String[]{"-XX:+UseZGC", "-XX:MaxGCPauseMillis=50"};
+        } else {
+                return new String[]{"-XX:-UseAdaptiveSizePolicy", "-XX:+UseConcMarkSweepGC"};
+        }
     }
 
     /**
